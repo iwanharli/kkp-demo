@@ -167,15 +167,15 @@ export const Modul5_SentimentAnalysis: React.FC = () => {
       {/* Main Content */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Sentiment Heatmap */}
-        <Card className="bg-slate-900/80 border-slate-700 lg:col-span-2">
+        <Card className="bg-slate-900/80 border-slate-700 lg:col-span-2 flex flex-col h-full">
           <CardHeader>
             <CardTitle className="text-white flex items-center gap-2">
               <MapPin className="w-5 h-5 text-cyan-400" />
               Map-based Sentiment Analysis
             </CardTitle>
           </CardHeader>
-          <CardContent className="p-0">
-            <div className="h-[400px] rounded-b-lg overflow-hidden">
+          <CardContent className="p-0 flex-1 flex flex-col">
+            <div className="flex-1 min-h-[450px] rounded-b-lg overflow-hidden relative">
               <MapContainer
                 center={[-2.5, 115]}
                 zoom={5}
@@ -242,7 +242,7 @@ export const Modul5_SentimentAnalysis: React.FC = () => {
         </Card>
 
         {/* Trending Keywords */}
-        <Card className="bg-slate-900/80 border-slate-700">
+        <Card className="bg-slate-900/80 border-slate-700 h-full flex flex-col">
           <CardHeader>
             <CardTitle className="text-white flex items-center gap-2">
               <Hash className="w-5 h-5 text-cyan-400" />

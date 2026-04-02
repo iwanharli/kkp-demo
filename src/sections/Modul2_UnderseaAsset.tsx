@@ -225,15 +225,15 @@ export const Modul2_UnderseaAsset: React.FC = () => {
       {/* Main Content */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Map */}
-        <Card className="bg-slate-900/80 border-slate-700 lg:col-span-2">
+        <Card className="bg-slate-900/80 border-slate-700 lg:col-span-2 flex flex-col h-full">
           <CardHeader>
             <CardTitle className="text-white flex items-center gap-2">
               <MapPin className="w-5 h-5 text-cyan-400" />
               Peta Monitoring AIS & Aset Bawah Laut
             </CardTitle>
           </CardHeader>
-          <CardContent className="p-0">
-            <div className="h-[500px] rounded-b-lg overflow-hidden">
+          <CardContent className="p-0 flex-1 flex flex-col">
+            <div className="flex-1 min-h-[500px] rounded-b-lg overflow-hidden relative">
               <MapContainer
                 center={[-2.5, 115]}
                 zoom={5}
@@ -337,7 +337,7 @@ export const Modul2_UnderseaAsset: React.FC = () => {
         </Card>
 
         {/* Alert Panel */}
-        <Card className="bg-slate-900/80 border-slate-700">
+        <Card className="bg-slate-900/80 border-slate-700 h-full flex flex-col">
           <CardHeader>
             <CardTitle className="text-white flex items-center gap-2">
               <Activity className="w-5 h-5 text-red-400" />
