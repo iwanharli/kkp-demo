@@ -282,7 +282,7 @@ function App() {
   return (
     <div className="min-h-screen bg-[#0a0f1c] text-white font-sans selection:bg-cyan-500/30 selection:text-white">
       {/* Header */}
-      <header className="fixed top-0 left-0 right-0 h-16 glass-header z-50">
+      <header className="fixed top-0 left-0 right-0 h-16 glass-header z-[2000]">
         <div className="h-full px-4 flex items-center justify-between">
           <div className="flex items-center gap-4">
             <button
@@ -334,7 +334,7 @@ function App() {
 
       {/* Sidebar */}
       <aside
-        className={`fixed left-0 top-16 bottom-0 glass-sidebar sidebar-container z-40 flex flex-col ${
+        className={`fixed left-0 top-16 bottom-0 glass-sidebar sidebar-container z-[1999] flex flex-col ${
           sidebarOpen ? 'w-64' : 'sidebar-collapsed'
         }`}
       >
