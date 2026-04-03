@@ -109,7 +109,7 @@ const OverviewDashboard: React.FC<{ onSelectModule: (id: ViewMode) => void }> = 
         
         <div className="relative z-10 w-full max-w-[120px] flex justify-center">
           <div className="w-24 h-24 rounded-2xl bg-white border border-white/20 flex items-center justify-center shadow-2xl p-3 overflow-hidden group hover:scale-105 transition-transform duration-500">
-            <img src="/logo.png" alt="Nexgov Logo" className="w-full h-full object-contain" />
+            <img src="/logo.png" alt="Nexgov Logo" className="w-full h-full object-contain scale-110" />
           </div>
         </div>
 
@@ -298,7 +298,7 @@ function App() {
             </button>
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-xl bg-white border border-white/20 flex items-center justify-center shadow-lg shadow-white/5 p-1.5 overflow-hidden group hover:scale-105 transition-transform duration-300">
-                <img src="/logo.png" alt="Nexgov Logo" className="w-full h-full object-contain" />
+                <img src="/logo.png" alt="Nexgov Logo" className="w-full h-full object-contain scale-110" />
               </div>
               <div className={sidebarOpen ? 'block' : 'hidden md:block'}>
                 <div className="flex flex-col justify-center -space-y-0.5">
