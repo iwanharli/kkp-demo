@@ -107,8 +107,8 @@ const OverviewDashboard: React.FC<{ onSelectModule: (id: ViewMode) => void }> = 
       <div className="relative overflow-hidden bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 rounded-xl border border-cyan-500/30 p-8 flex flex-col md:flex-row items-center gap-8">
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImEiIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTTAgNDBoNDBWMEgwVjQwWiIgZmlsbD0ibm9uZSIvPjxwYXRoIGQ9Ik0wIDQwaDQwVjBIMFY0MFoiIGZpbGw9IiMwNmI2ZDQiIGZpbGwtb3BhY2l0eT0iMC4wNSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNhKSIvPjwvc3ZnPg==')] opacity-50" />
         
-        <div className="relative z-10 w-full max-w-[220px] flex justify-center">
-          <div className="w-full h-20 rounded-2xl bg-white border border-white/20 flex items-center justify-center shadow-2xl p-3 overflow-hidden group hover:scale-105 transition-transform duration-500">
+        <div className="relative z-10 w-full max-w-[120px] flex justify-center">
+          <div className="w-24 h-24 rounded-2xl bg-white border border-white/20 flex items-center justify-center shadow-2xl p-3 overflow-hidden group hover:scale-105 transition-transform duration-500">
             <img src="/logo.svg" alt="Nexgov Logo" className="w-full h-full object-contain" />
           </div>
         </div>
@@ -296,9 +296,20 @@ function App() {
             >
               <Menu className={`w-5 h-5 transition-transform duration-300 ${sidebarOpen ? 'rotate-90' : '0'}`} />
             </button>
-              <div className="h-8 w-auto flex items-center justify-center overflow-hidden group bg-white px-3 py-1 rounded-lg border border-white/10 shadow-lg shadow-white/5">
-                <img src="/logo.svg" alt="Nexgov Intelligence Logo" className="h-full w-auto object-contain" />
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-white border border-white/20 flex items-center justify-center shadow-lg shadow-white/5 p-1.5 overflow-hidden group hover:scale-105 transition-transform duration-300">
+                <img src="/logo.svg" alt="Nexgov Logo" className="w-full h-full object-contain" />
               </div>
+              <div className={sidebarOpen ? 'block' : 'hidden md:block'}>
+                <h1 className="font-black text-sm md:text-lg leading-tight tracking-tighter uppercase whitespace-nowrap">
+                  NEXGOV <span className="text-cyan-400">INTELLIGENCE</span>
+                </h1>
+                <div className="flex items-center gap-1.5">
+                  <span className="w-1 h-1 bg-cyan-500 rounded-full animate-pulse" />
+                  <p className="text-[9px] text-slate-500 font-bold tracking-[0.2em] uppercase">KKP RI</p>
+                </div>
+              </div>
+            </div>
           </div>
 
           <div className="flex items-center gap-6">
