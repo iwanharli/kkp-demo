@@ -123,10 +123,13 @@ const OverviewDashboard: React.FC<{ onSelectModule: (id: ViewMode) => void }> = 
               SECURE
             </Badge>
           </div>
-          <h1 className="text-4xl font-black text-white mb-3 tracking-tighter">
+          <h1 className="text-4xl font-black text-white mb-1 tracking-tighter">
             NEXGOV <span className="text-cyan-400">INTELLIGENCE</span>
           </h1>
-          <p className="text-slate-450 max-w-xl text-sm leading-relaxed">
+          <p className="text-[10px] md:text-[12px] font-black tracking-[0.2em] uppercase text-[#D4AF37] mb-4">
+            INDOPOL SURVEY NETWORK
+          </p>
+          <p className="text-slate-450 max-w-xl text-sm leading-relaxed opacity-80">
             Pusat Command Center Intelijen Laut Kementerian Kelautan dan Perikanan. 
             Menganalisis data, memantau infrastruktur, dan memetakan persepsi publik secara real-time.
           </p>
