@@ -296,20 +296,9 @@ function App() {
             >
               <Menu className={`w-5 h-5 transition-transform duration-300 ${sidebarOpen ? 'rotate-90' : '0'}`} />
             </button>
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-slate-900 border border-slate-700/50 flex items-center justify-center shadow-lg shadow-cyan-500/10 p-1.5 overflow-hidden group hover:border-cyan-500/50 transition-colors">
-                <img src="/logo.svg" alt="Logo" className="w-full h-full object-contain filter invert brightness-200" />
+              <div className="h-10 w-auto flex items-center justify-center overflow-hidden group">
+                <img src="/logo.svg" alt="Nexgov Intelligence Logo" className="h-full w-auto object-contain filter invert brightness-200" />
               </div>
-              <div className={sidebarOpen ? 'block' : 'hidden md:block'}>
-                <h1 className="font-black text-sm md:text-lg leading-tight tracking-tighter uppercase whitespace-nowrap">
-                  NEXGOV <span className="text-cyan-400">INTELLIGENCE</span>
-                </h1>
-                <div className="flex items-center gap-2">
-                  <span className="w-1 h-1 bg-cyan-500 rounded-full animate-pulse" />
-                  <p className="text-[10px] text-slate-500 font-bold tracking-[0.2em] uppercase">KKP RI</p>
-                </div>
-              </div>
-            </div>
           </div>
 
           <div className="flex items-center gap-6">
