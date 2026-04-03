@@ -19,7 +19,6 @@ import {
   LogOut,
   Activity,
   Clock,
-  Wifi,
   Server
 } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
@@ -105,25 +104,31 @@ const OverviewDashboard: React.FC<{ onSelectModule: (id: ViewMode) => void }> = 
   return (
     <div className="space-y-6">
       {/* Welcome Banner */}
-      <div className="relative overflow-hidden bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 rounded-xl border border-cyan-500/30 p-8">
+      <div className="relative overflow-hidden bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 rounded-xl border border-cyan-500/30 p-8 flex flex-col md:flex-row items-center gap-8">
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImEiIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTTAgNDBoNDBWMEgwVjQwWiIgZmlsbD0ibm9uZSIvPjxwYXRoIGQ9Ik0wIDQwaDQwVjBIMFY0MFoiIGZpbGw9IiMwNmI2ZDQiIGZpbGwtb3BhY2l0eT0iMC4wNSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNhKSIvPjwvc3ZnPg==')] opacity-50" />
-        <div className="relative z-10">
-          <div className="flex items-center gap-3 mb-4">
-            <Activity className="w-6 h-6 text-cyan-400 animate-pulse" />
-            <Badge variant="outline" className="border-cyan-500 text-cyan-400">
+        
+        <div className="relative z-10 w-full max-w-[200px] flex justify-center">
+          <div className="w-32 h-32 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 flex items-center justify-center shadow-2xl p-4">
+            <img src="/logo.svg" alt="Nexgov Logo" className="w-full h-full object-contain filter invert brightness-200" />
+          </div>
+        </div>
+
+        <div className="relative z-10 flex-1 text-center md:text-left">
+          <div className="flex items-center justify-center md:justify-start gap-4 mb-4">
+            <Activity className="w-5 h-5 text-cyan-400 animate-pulse" />
+            <Badge variant="outline" className="border-cyan-500/50 text-cyan-400 text-[10px] font-bold tracking-widest">
               SYSTEM ONLINE
             </Badge>
-            <Badge variant="outline" className="border-green-500 text-green-400">
-              <Wifi className="w-3 h-3 mr-1" />
-              CONNECTED
+            <Badge variant="outline" className="border-green-500/50 text-green-400 text-[10px] font-bold tracking-widest">
+              SECURE
             </Badge>
           </div>
-          <h1 className="text-3xl font-bold text-white mb-2">
-            SELAMAT DATANG DI NEXGOV INTELEJEN
+          <h1 className="text-4xl font-black text-white mb-3 tracking-tighter">
+            NEXGOV <span className="text-cyan-400">INTELLIGENCE</span>
           </h1>
-          <p className="text-slate-400 max-w-2xl">
-            Dashboard intelijen terintegrasi untuk monitoring dan analisis data kelautan 
-            Kementerian Kelautan dan Perikanan Republik Indonesia.
+          <p className="text-slate-450 max-w-xl text-sm leading-relaxed">
+            Pusat Command Center Intelijen Laut Kementerian Kelautan dan Perikanan. 
+            Menganalisis data, memantau infrastruktur, dan memetakan persepsi publik secara real-time.
           </p>
         </div>
       </div>
@@ -292,14 +297,16 @@ function App() {
               <Menu className={`w-5 h-5 transition-transform duration-300 ${sidebarOpen ? 'rotate-90' : '0'}`} />
             </button>
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center shadow-lg shadow-cyan-500/20">
-                <LayoutDashboard className="w-5 h-5 text-white" />
+              <div className="w-10 h-10 rounded-xl bg-slate-900 border border-slate-700/50 flex items-center justify-center shadow-lg shadow-cyan-500/10 p-1.5 overflow-hidden group hover:border-cyan-500/50 transition-colors">
+                <img src="/logo.svg" alt="Logo" className="w-full h-full object-contain filter invert brightness-200" />
               </div>
               <div className={sidebarOpen ? 'block' : 'hidden md:block'}>
-                <h1 className="font-bold text-lg leading-tight tracking-tight uppercase">NEXGOV INTELEJEN</h1>
+                <h1 className="font-black text-sm md:text-lg leading-tight tracking-tighter uppercase whitespace-nowrap">
+                  NEXGOV <span className="text-cyan-400">INTELLIGENCE</span>
+                </h1>
                 <div className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 bg-cyan-500 rounded-full animate-pulse" />
-                  <p className="text-[10px] text-slate-400 font-bold tracking-widest uppercase">KKP REPUBLIK INDONESIA</p>
+                  <span className="w-1 h-1 bg-cyan-500 rounded-full animate-pulse" />
+                  <p className="text-[10px] text-slate-500 font-bold tracking-[0.2em] uppercase">KKP RI</p>
                 </div>
               </div>
             </div>
@@ -459,7 +466,7 @@ function App() {
           <div className="flex items-center gap-4">
             <span>© {new Date().getFullYear()} KKP Republik Indonesia</span>
             <div className="w-1 h-1 bg-slate-800 rounded-full" />
-            <span className="text-cyan-500/50 font-mono">Nexgov Intelejen v2.4-stable</span>
+            <span className="text-cyan-500/50 font-mono">Nexgov Intelligence v2.4-stable</span>
           </div>
           <div className="flex items-center gap-4">
             <span className="flex items-center gap-2 bg-green-500/5 text-green-500 px-3 py-1 rounded-full border border-green-500/20">
