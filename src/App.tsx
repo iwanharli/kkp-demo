@@ -301,12 +301,16 @@ function App() {
                 <img src="/logo.png" alt="Nexgov Logo" className="w-full h-full object-contain" />
               </div>
               <div className={sidebarOpen ? 'block' : 'hidden md:block'}>
-                <h1 className="font-black text-sm md:text-lg leading-tight tracking-tighter uppercase whitespace-nowrap">
-                  NEXGOV <span className="text-cyan-400">INTELLIGENCE</span>
-                </h1>
-                <div className="flex items-center gap-1.5">
-                  <span className="w-1 h-1 bg-cyan-500 rounded-full animate-pulse" />
-                  <p className="text-[9px] text-slate-500 font-bold tracking-[0.2em] uppercase">KKP RI</p>
+                <div className="flex flex-col justify-center -space-y-0.5">
+                  <h1 className="font-black text-sm md:text-base leading-none tracking-tighter uppercase text-white">
+                    NEXGOV
+                  </h1>
+                  <h2 className="font-bold text-[10px] md:text-[11px] leading-none tracking-[0.2em] uppercase text-cyan-400">
+                    INTELLIGENCE
+                  </h2>
+                  <p className="text-[7px] md:text-[8px] text-slate-500 font-bold tracking-[0.1em] uppercase whitespace-nowrap opacity-80">
+                    INDOPOL SURVEY NETWORK
+                  </p>
                 </div>
               </div>
             </div>
