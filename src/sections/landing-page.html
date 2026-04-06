@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blue Economy Control Tower — NexGov KKP RI</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:        #030C1A;
+    --surface:   #071828;
+    --surface2:  #0B2236;
+    --border:    #113350;
+    --accent:    #00AAFF;
+    --accent2:   #0066CC;
+    --accent3:   #00DDA8;
+    --accent4:   #FFB020;
+    --red:       #FF4B4B;
+    --text:      #DDF0FF;
+    --text-muted:#5F8EAE;
+    --text-dim:  #244060;
+    --glow:      0 0 32px rgba(0,170,255,0.14);
+    --radius:    16px;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+
+  body {
+    font-family:'Plus Jakarta Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    overflow-x: hidden;
+    line-height: 1.65;
+  }
+
+  /* Ocean wave grid */
+  body::before {
+    content:'';
+    position:fixed; inset:0;
+    background-image:
+      radial-gradient(ellipse 80% 50% at 50% -10%, rgba(0,120,255,0.10) 0%, transparent 70%),
+      linear-gradient(rgba(0,170,255,0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,170,255,0.025) 1px, transparent 1px);
+    background-size: 100% 100%, 56px 56px, 56px 56px;
+    pointer-events:none; z-index:0;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:14px 48px;
+    background:rgba(3,12,26,0.88);
+    backdrop-filter:blur(20px);
+    border-bottom:1px solid var(--border);
+  }
+  .nav-logo {
+    display:flex; align-items:center; gap:10px;
+    font-family:'Space Mono', monospace; font-size:12px;
+    color:var(--accent); letter-spacing:2px; text-transform:uppercase;
+  }
+  .nav-logo .wave { font-size:20px; }
+  .nav-links { display:flex; gap:28px; list-style:none; }
+  .nav-links a { color:var(--text-muted); text-decoration:none; font-size:12px; font-weight:600; transition:color .2s; }
+  .nav-links a:hover { color:var(--accent); }
+  .nav-badge {
+    background:linear-gradient(135deg,rgba(0,170,255,0.15),rgba(0,102,204,0.15));
+    border:1px solid rgba(0,170,255,0.25);
+    border-radius:6px; padding:5px 12px;
+    font-size:10px; font-family:'Space Mono',monospace; color:var(--accent); letter-spacing:1px;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position:relative; z-index:1;
+    min-height:100vh;
+    display:flex; align-items:center; justify-content:center;
+    text-align:center; padding:130px 24px 90px;
+    overflow:hidden;
+  }
+  .hero-orb {
+    position:absolute; border-radius:50%; filter:blur(90px); pointer-events:none;
+  }
+  .o1{width:600px;height:600px;background:rgba(0,100,220,0.09);top:-120px;left:-150px;}
+  .o2{width:450px;height:450px;background:rgba(0,200,168,0.07);bottom:-80px;right:-80px;}
+  .o3{width:300px;height:300px;background:rgba(0,170,255,0.06);top:40%;left:55%;}
+
+  .hero-kementerian {
+    display:inline-flex; align-items:center; gap:10px;
+    background:rgba(0,170,255,0.07); border:1px solid rgba(0,170,255,0.18);
+    border-radius:100px; padding:7px 20px 7px 14px;
+    font-size:12px; font-weight:600; color:var(--accent);
+    margin-bottom:28px; animation:fadeIn .5s ease both;
+  }
+  .hero-kementerian .dot {
+    width:7px;height:7px;border-radius:50%;background:var(--accent3);
+    animation:pulse 1.8s infinite;
+  }
+
+  @keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.4;transform:scale(.75);}}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
+  @keyframes fadeInUp{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);}}
+
+  .hero h1 {
+    font-size:clamp(32px,5.5vw,68px); font-weight:800; line-height:1.08;
+    margin-bottom:8px; animation:fadeInUp .65s .1s ease both;
+  }
+  .hero h1 .blue { color:var(--accent); }
+  .hero h2 {
+    font-size:clamp(20px,3vw,38px); font-weight:700; color:var(--accent3);
+    margin-bottom:22px; animation:fadeInUp .65s .18s ease both;
+  }
+  .hero p {
+    font-size:16px; color:var(--text-muted); max-width:640px;
+    margin:0 auto 48px; animation:fadeInUp .65s .26s ease both; line-height:1.75;
+  }
+
+  .hero-stats {
+    display:flex; justify-content:center; gap:40px; flex-wrap:wrap;
+    animation:fadeInUp .65s .34s ease both;
+  }
+  .hero-stat .num {
+    font-size:30px; font-weight:800; font-family:'Space Mono',monospace; color:var(--accent);
+  }
+  .hero-stat .num.green { color:var(--accent3); }
+  .hero-stat .num.gold  { color:var(--accent4); }
+  .hero-stat .label { font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; margin-top:3px; }
+
+  /* ── SECTION ── */
+  section {
+    position:relative; z-index:1;
+    padding:80px 24px; max-width:1200px; margin:0 auto;
+  }
+  .section-label {
+    font-family:'Space Mono',monospace; font-size:11px;
+    color:var(--accent); letter-spacing:3px; text-transform:uppercase; margin-bottom:12px;
+  }
+  .section-title { font-size:clamp(26px,3.5vw,42px); font-weight:800; margin-bottom:14px; line-height:1.18; }
+  .section-title .hl { color:var(--accent3); }
+  .section-title .hlb { color:var(--accent); }
+  .section-desc { color:var(--text-muted); font-size:15px; max-width:700px; margin-bottom:52px; }
+
+  /* ── FLOW ── */
+  .flow-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:20px; margin-bottom:48px; }
+  .flow-card {
+    background:var(--surface); border:1px solid var(--border); border-radius:var(--radius);
+    padding:28px; position:relative; overflow:hidden; transition:all .3s;
+  }
+  .flow-card::after {
+    content:''; position:absolute; top:0;left:0;right:0; height:2px;
+    background:linear-gradient(90deg,transparent,var(--accent),transparent);
+    opacity:0; transition:opacity .3s;
+  }
+  .flow-card:hover::after{opacity:1;}
+  .flow-card:hover{border-color:rgba(0,170,255,0.22);transform:translateY(-4px);}
+  .flow-num { font-family:'Space Mono',monospace; font-size:42px; font-weight:700; color:var(--text-dim); line-height:1; margin-bottom:14px; }
+  .flow-icon { font-size:30px; margin-bottom:14px; display:block; }
+  .flow-title { font-size:15px; font-weight:700; margin-bottom:7px; }
+  .flow-desc { font-size:13px; color:var(--text-muted); line-height:1.65; }
+
+  /* ── ARCH ── */
+  .arch-flow {
+    display:flex; align-items:center; gap:0; overflow-x:auto;
+    padding:36px 0; justify-content:center; flex-wrap:wrap; gap:0;
+  }
+  .arch-node {
+    background:var(--surface); border:1px solid var(--border); border-radius:12px;
+    padding:18px 22px; min-width:130px; text-align:center; flex-shrink:0; transition:all .3s;
+  }
+  .arch-node:hover{border-color:rgba(0,170,255,.4);transform:scale(1.04);}
+  .arch-node.hl {
+    background:linear-gradient(135deg,rgba(0,170,255,.09),rgba(0,200,168,.08));
+    border-color:rgba(0,170,255,.3); box-shadow:0 0 24px rgba(0,170,255,.12);
+  }
+  .arch-node .nicon{font-size:26px;display:block;margin-bottom:6px;}
+  .arch-node .nname{font-size:12px;font-weight:700;}
+  .arch-node .nsub{font-size:10px;color:var(--text-muted);margin-top:2px;font-family:'Space Mono',monospace;}
+  .arch-arrow { flex-shrink:0; padding:0 4px; display:flex; align-items:center; }
+  .arrow-line { width:36px;height:2px;background:linear-gradient(90deg,var(--border),var(--accent),var(--border)); }
+  .arrow-head { font-size:14px;color:var(--accent);margin-left:-8px; }
+
+  /* ── TECH CARDS ── */
+  .tech-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:22px; }
+  .tech-card {
+    background:var(--surface); border:1px solid var(--border); border-radius:var(--radius);
+    padding:30px; transition:all .3s; position:relative; overflow:hidden;
+  }
+  .tech-card:hover{border-color:rgba(0,170,255,.3);box-shadow:0 0 28px rgba(0,170,255,.08);transform:translateY(-3px);}
+  .tech-tag {
+    display:inline-block; font-family:'Space Mono',monospace; font-size:10px;
+    padding:4px 10px; border-radius:5px; margin-bottom:14px; letter-spacing:1px;
+  }
+  .tag-ai  {background:rgba(0,170,255,.1);color:var(--accent);border:1px solid rgba(0,170,255,.2);}
+  .tag-geo {background:rgba(0,200,168,.1);color:var(--accent3);border:1px solid rgba(0,200,168,.2);}
+  .tag-nlp {background:rgba(255,176,32,.1);color:var(--accent4);border:1px solid rgba(255,176,32,.2);}
+  .tag-ais {background:rgba(100,180,255,.1);color:#7DB9FF;border:1px solid rgba(100,180,255,.2);}
+  .tag-sec {background:rgba(255,75,75,.1);color:#FF8080;border:1px solid rgba(255,75,75,.2);}
+  .tag-etl {background:rgba(160,90,255,.1);color:#C090FF;border:1px solid rgba(160,90,255,.2);}
+  .tech-title{font-size:17px;font-weight:700;margin-bottom:10px;}
+  .tech-desc{font-size:13px;color:var(--text-muted);line-height:1.7;margin-bottom:18px;}
+  .chip-list{display:flex;flex-wrap:wrap;gap:7px;}
+  .chip{background:var(--surface2);border:1px solid var(--border);border-radius:5px;padding:4px 9px;font-size:11px;color:var(--text-muted);font-family:'Space Mono',monospace;}
+
+  /* ── DATA CARDS ── */
+  .data-split{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-bottom:44px;}
+  .data-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:30px;}
+  .data-card.str{border-top:3px solid var(--accent3);}
+  .data-card.unstr{border-top:3px solid var(--accent4);}
+  .data-card-title{font-size:18px;font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:10px;}
+  .badge-wrap{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0;}
+  .src-badge{display:flex;align-items:center;gap:6px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:7px 12px;font-size:11px;font-weight:600;}
+  .b-int{border-color:rgba(0,200,168,.28);color:var(--accent3);}
+  .b-ext{border-color:rgba(255,176,32,.28);color:var(--accent4);}
+
+  /* ── MODULE CARDS ── */
+  .mod-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:22px;margin-bottom:44px;}
+  .mod-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:28px;transition:all .3s;}
+  .mod-card:hover{border-color:rgba(0,170,255,.28);transform:translateY(-4px);box-shadow:var(--glow);}
+  .mod-num{font-family:'Space Mono',monospace;font-size:11px;color:var(--accent);letter-spacing:2px;margin-bottom:10px;}
+  .mod-icon{font-size:34px;margin-bottom:12px;display:block;}
+  .mod-title{font-size:16px;font-weight:700;margin-bottom:8px;}
+  .mod-desc{font-size:13px;color:var(--text-muted);line-height:1.7;margin-bottom:16px;}
+  .mod-stats{display:flex;gap:16px;flex-wrap:wrap;}
+  .mod-stat{text-align:center;}
+  .mod-stat .sv{font-size:20px;font-weight:800;font-family:'Space Mono',monospace;color:var(--accent);}
+  .mod-stat .sv.g{color:var(--accent3);}
+  .mod-stat .sv.r{color:var(--red);}
+  .mod-stat .sl{font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;}
+
+  /* ── CROSSTAB ── */
+  .crosstab-box{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:28px;}
+  .ctab-head{background:var(--surface2);border-bottom:1px solid var(--border);padding:18px 26px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+  .ctab-title{font-size:14px;font-weight:700;display:flex;align-items:center;gap:10px;}
+  .ai-pill{background:linear-gradient(135deg,rgba(0,170,255,.14),rgba(0,180,150,.12));border:1px solid rgba(0,170,255,.2);border-radius:5px;padding:3px 9px;font-size:10px;font-family:'Space Mono',monospace;color:var(--accent);letter-spacing:.8px;}
+  .ctab-ctrl{display:flex;gap:7px;flex-wrap:wrap;padding:14px 26px;border-bottom:1px solid var(--border);background:rgba(0,170,255,.02);}
+  .ctrl-btn{background:var(--surface2);border:1px solid var(--border);border-radius:7px;padding:6px 13px;font-size:12px;color:var(--text-muted);cursor:pointer;transition:all .2s;font-family:'Plus Jakarta Sans',sans-serif;}
+  .ctrl-btn.active,.ctrl-btn:hover{background:rgba(0,170,255,.1);border-color:rgba(0,170,255,.3);color:var(--accent);}
+  .ctab-wrap{overflow-x:auto;padding:22px 26px;}
+  table{width:100%;border-collapse:collapse;font-size:13px;}
+  th{background:rgba(0,170,255,.06);color:var(--accent);font-family:'Space Mono',monospace;font-size:10.5px;letter-spacing:.5px;padding:11px 14px;text-align:left;border-bottom:2px solid rgba(0,170,255,.14);white-space:nowrap;}
+  td{padding:11px 14px;border-bottom:1px solid rgba(17,51,80,.55);color:var(--text-muted);white-space:nowrap;}
+  tr:last-child td{border-bottom:none;}
+  tr:hover td{background:rgba(0,170,255,.03);color:var(--text);}
+  .td-name{color:var(--text);font-weight:600;}
+  .pos{color:var(--accent3);font-weight:600;}
+  .neg{color:var(--red);font-weight:600;}
+  .neu{color:var(--accent4);font-weight:600;}
+  .bar-cell{display:flex;align-items:center;gap:9px;}
+  .bar-bg{flex:1;height:5px;background:var(--surface2);border-radius:3px;overflow:hidden;min-width:55px;}
+  .bar-fill{height:100%;border-radius:3px;}
+  .bblue{background:linear-gradient(90deg,var(--accent),var(--accent2));}
+  .bgreen{background:linear-gradient(90deg,var(--accent3),#00AAFF);}
+  .borange{background:linear-gradient(90deg,var(--accent4),#FF8020);}
+  .bred{background:linear-gradient(90deg,var(--red),#FF8080);}
+  .sc{font-family:'Space Mono',monospace;font-size:11px;color:var(--text);}
+
+  /* ── TABS ── */
+  .tab-nav{display:flex;gap:4px;margin-bottom:22px;background:var(--surface);border:1px solid var(--border);border-radius:11px;padding:5px;width:fit-content;}
+  .tab-btn{padding:9px 18px;border:none;background:transparent;color:var(--text-muted);font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;font-weight:600;cursor:pointer;border-radius:8px;transition:all .2s;}
+  .tab-btn.active{background:linear-gradient(135deg,rgba(0,170,255,.14),rgba(0,180,150,.1));color:var(--accent);border:1px solid rgba(0,170,255,.2);}
+  .tab-content{display:none;}
+  .tab-content.active{display:block;}
+
+  /* ── INSIGHT BOX ── */
+  .insight-box{display:flex;gap:14px;align-items:flex-start;background:linear-gradient(135deg,rgba(0,170,255,.06),rgba(0,200,168,.05));border:1px solid rgba(0,170,255,.14);border-radius:12px;padding:18px 22px;margin-top:22px;}
+  .insight-icon{font-size:22px;flex-shrink:0;}
+  .insight-title{font-size:13px;font-weight:700;color:var(--accent);margin-bottom:3px;}
+  .insight-text{font-size:12.5px;color:var(--text-muted);line-height:1.65;}
+
+  /* ── INTEGRATION ── */
+  .integ-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:14px;margin-bottom:32px;}
+  .integ-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:22px;text-align:center;transition:all .3s;cursor:pointer;}
+  .integ-card:hover{border-color:rgba(0,170,255,.3);transform:translateY(-2px);box-shadow:0 8px 22px rgba(0,0,0,.3);}
+  .integ-icon{font-size:32px;margin-bottom:10px;display:block;}
+  .integ-name{font-size:13px;font-weight:700;margin-bottom:3px;}
+  .integ-type{font-size:10px;color:var(--text-muted);font-family:'Space Mono',monospace;}
+
+  /* ── FEATURE LIST ── */
+  .feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:18px;margin-top:38px;}
+  .feat-item{display:flex;gap:14px;padding:22px;background:var(--surface);border:1px solid var(--border);border-radius:12px;transition:all .3s;}
+  .feat-item:hover{border-color:rgba(0,200,168,.3);background:rgba(0,200,168,.02);}
+  .feat-icon{font-size:26px;flex-shrink:0;width:48px;height:48px;background:var(--surface2);border-radius:11px;display:flex;align-items:center;justify-content:center;}
+  .feat-content .title{font-size:14px;font-weight:700;margin-bottom:5px;}
+  .feat-content .desc{font-size:12.5px;color:var(--text-muted);line-height:1.65;}
+
+  /* ── ROADMAP ── */
+  .roadmap{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0;position:relative;}
+  .roadmap::before{content:'';position:absolute;top:36px;left:10%;right:10%;height:2px;background:linear-gradient(90deg,var(--accent2),var(--accent),var(--accent3));z-index:0;}
+  .phase-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:26px;position:relative;z-index:1;margin:0 8px;transition:all .3s;}
+  .phase-card:hover{border-color:rgba(0,170,255,.3);transform:translateY(-4px);}
+  .phase-dot{width:16px;height:16px;border-radius:50%;background:var(--accent);border:3px solid var(--bg);margin:0 auto 18px;box-shadow:0 0 12px rgba(0,170,255,.5);}
+  .phase-dot.g{background:var(--accent3);box-shadow:0 0 12px rgba(0,200,168,.5);}
+  .phase-num{font-family:'Space Mono',monospace;font-size:10px;color:var(--accent);letter-spacing:2px;text-align:center;margin-bottom:8px;}
+  .phase-period{font-size:11px;color:var(--text-muted);text-align:center;margin-bottom:12px;}
+  .phase-title{font-size:14px;font-weight:700;margin-bottom:10px;text-align:center;}
+  .phase-items{list-style:none;font-size:12px;color:var(--text-muted);}
+  .phase-items li{padding:3px 0;}
+  .phase-items li::before{content:'▸ ';color:var(--accent);}
+
+  /* ── DIVIDER ── */
+  .divider{height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);margin:0 24px;}
+
+  /* ── FOOTER ── */
+  footer{position:relative;z-index:1;text-align:center;padding:44px 24px;color:var(--text-muted);font-size:12px;border-top:1px solid var(--border);}
+  footer .logo{font-family:'Space Mono',monospace;color:var(--accent);font-size:13px;}
+
+  /* ── RESPONSIVE ── */
+  @media(max-width:768px){
+    .data-split,.roadmap{grid-template-columns:1fr;}
+    nav{padding:14px 18px;}
+    .nav-links,.nav-badge{display:none;}
+    .hero-stats{gap:20px;}
+    .roadmap::before{display:none;}
+    .phase-card{margin:0 0 16px;}
+  }
+
+  /* ── REVEAL ── */
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .55s ease,transform .55s ease;}
+  .reveal.visible{opacity:1;transform:translateY(0);}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <span class="wave">🌊</span>
+    NEXGOV · BLUE ECONOMY CONTROL TOWER
+  </div>
+  <ul class="nav-links">
+    <li><a href="#cara-kerja">Cara Kerja</a></li>
+    <li><a href="#modul">5 Modul</a></li>
+    <li><a href="#teknologi">Teknologi AI</a></li>
+    <li><a href="#data">Data</a></li>
+    <li><a href="#krostab">Krostab AI</a></li>
+    <li><a href="#integrasi">Integrasi</a></li>
+  </ul>
+  <div class="nav-badge">KKP RI · 2026</div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-orb o1"></div>
+  <div class="hero-orb o2"></div>
+  <div class="hero-orb o3"></div>
+  <div>
+    <div class="hero-kementerian">
+      <span class="dot"></span>
+      Kementerian Kelautan dan Perikanan · Republik Indonesia
+    </div>
+    <h1><span class="blue">Blue Economy</span></h1>
+    <h2>Control Tower Dashboard</h2>
+    <p>Sistem Terpadu Pemantauan Ruang Laut Nasional — menyatukan Data GIS, Administratif & Sosial dalam satu layar cerdas berbasis Kecerdasan Buatan.</p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="num">6,4 Jt</div>
+        <div class="label">km² Wilayah Laut</div>
+      </div>
+      <div class="hero-stat">
+        <div class="num green">97%</div>
+        <div class="label">Akurasi AI Spasial</div>
+      </div>
+      <div class="hero-stat">
+        <div class="num">5</div>
+        <div class="label">Modul Terintegrasi</div>
+      </div>
+      <div class="hero-stat">
+        <div class="num gold">Rp 1,2T+</div>
+        <div class="label">PNBP Terlindungi</div>
+      </div>
+      <div class="hero-stat">
+        <div class="num">&lt;5 dtk</div>
+        <div class="label">Respons AI</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- CARA KERJA -->
+<section id="cara-kerja" class="reveal">
+  <div class="section-label">01 — Alur Sistem</div>
+  <h2 class="section-title">Bagaimana <span class="hlb">Control Tower</span> Bekerja?</h2>
+  <p class="section-desc">Platform NexGov mengintegrasikan tiga lapisan data — Spasial/GIS, Administratif (Perizinan), dan Sosial (Sentimen Pesisir) — melalui pipeline AI yang berjalan 24/7 secara real-time.</p>
+
+  <div class="flow-grid">
+    <div class="flow-card">
+      <div class="flow-num">01</div>
+      <span class="flow-icon">📡</span>
+      <div class="flow-title">Akuisisi Data Multi-Sumber</div>
+      <div class="flow-desc">Data dikumpulkan otomatis dari SKKPRL/OSS, AIS Vessel Tracking, BIG Geoportal, Indopol Network, SIMPONI PNBP, dan DKP Provinsi secara real-time maupun terjadwal.</div>
+    </div>
+    <div class="flow-card">
+      <div class="flow-num">02</div>
+      <span class="flow-icon">⚙️</span>
+      <div class="flow-title">Processing Engine L2</div>
+      <div class="flow-desc">GeoServer + PostGIS memproses data spasial, AIS Stream Processor memantau kapal real-time, dan NLP Engine menganalisis sentimen teks dari media sosial & berita.</div>
+    </div>
+    <div class="flow-card">
+      <div class="flow-num">03</div>
+      <span class="flow-icon">🧠</span>
+      <div class="flow-title">AI Spatial & Sentiment Engine</div>
+      <div class="flow-desc">AI Spatial Conflict mendeteksi tumpang tindih izin secara otomatis (97% akurasi), sementara AI NLP Sentiment menganalisis persepsi masyarakat pesisir dari 450+ sumber data.</div>
+    </div>
+    <div class="flow-card">
+      <div class="flow-num">04</div>
+      <span class="flow-icon">🔗</span>
+      <div class="flow-title">Krostabulasi Data AI</div>
+      <div class="flow-desc">AI menggabungkan data GIS, izin KKPRL, posisi kapal (AIS), sentimen masyarakat, dan status PNBP untuk menghasilkan analisis multidimensi ruang laut yang komprehensif.</div>
+    </div>
+    <div class="flow-card">
+      <div class="flow-num">05</div>
+      <span class="flow-icon">🗺️</span>
+      <div class="flow-title">Dashboard Spasial Interaktif</div>
+      <div class="flow-desc">Peta interaktif, grafik real-time, dan tabel krostab ditampilkan dalam satu layar responsif yang dapat diakses dari desktop maupun perangkat mobile.</div>
+    </div>
+    <div class="flow-card">
+      <div class="flow-num">06</div>
+      <span class="flow-icon">🔴</span>
+      <div class="flow-title">Alert & Red Flag Otomatis</div>
+      <div class="flow-desc">Sistem mengirim notifikasi merah otomatis saat mendeteksi: tumpang tindih izin, kapal di zona merah, bottleneck birokrasi, lonjakan sentimen negatif, atau potensi revenue leakage.</div>
+    </div>
+  </div>
+
+  <!-- Architecture -->
+  <div class="section-label" style="margin-bottom:16px">Arsitektur 3-Layer NexGov</div>
+  <div class="arch-flow">
+    <div class="arch-node">
+      <span class="nicon">🗄️</span>
+      <div class="nname">L1: Sumber Data</div>
+      <div class="nsub">SKKPRL, AIS, BIG</div>
+    </div>
+    <div class="arch-arrow"><div class="arrow-line"></div><div class="arrow-head">▶</div></div>
+    <div class="arch-node hl">
+      <span class="nicon">⚙️</span>
+      <div class="nname">L2: Processing</div>
+      <div class="nsub">GeoServer + AI</div>
+    </div>
+    <div class="arch-arrow"><div class="arrow-line"></div><div class="arrow-head">▶</div></div>
+    <div class="arch-node hl">
+      <span class="nicon">🧠</span>
+      <div class="nname">AI Engine</div>
+      <div class="nsub">Spatial + NLP</div>
+    </div>
+    <div class="arch-arrow"><div class="arrow-line"></div><div class="arrow-head">▶</div></div>
+    <div class="arch-node">
+      <span class="nicon">🌊</span>
+      <div class="nname">Data Lake</div>
+      <div class="nsub">Centralized</div>
+    </div>
+    <div class="arch-arrow"><div class="arrow-line"></div><div class="arrow-head">▶</div></div>
+    <div class="arch-node hl">
+      <span class="nicon">📊</span>
+      <div class="nname">L3: Dashboard</div>
+      <div class="nsub">NexGov UI</div>
+    </div>
+    <div class="arch-arrow"><div class="arrow-line"></div><div class="arrow-head">▶</div></div>
+    <div class="arch-node">
+      <span class="nicon">👤</span>
+      <div class="nname">Pengambil</div>
+      <div class="nsub">Keputusan KKP</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- 5 MODUL -->
+<section id="modul" class="reveal">
+  <div class="section-label">02 — Modul Platform</div>
+  <h2 class="section-title">5 Modul <span class="hl">Terintegrasi</span> NexGov</h2>
+  <p class="section-desc">Setiap modul dirancang khusus untuk kebutuhan pemantauan ruang laut KKP RI — bekerja secara mandiri maupun saling terhubung dalam satu platform.</p>
+
+  <div class="mod-grid">
+    <div class="mod-card">
+      <div class="mod-num">MODUL 01</div>
+      <span class="mod-icon">📋</span>
+      <div class="mod-title">Smart KKPRL Tracker</div>
+      <div class="mod-desc">Monitoring izin real-time dengan visualisasi spasial. Direktur dapat mendeteksi hambatan birokrasi secara langsung dan mengambil tindakan korektif sebelum investasi tertunda.</div>
+      <div class="mod-stats">
+        <div class="mod-stat"><div class="sv">247</div><div class="sl">Izin Aktif</div></div>
+        <div class="mod-stat"><div class="sv" style="color:var(--accent4)">83</div><div class="sl">Proses Review</div></div>
+        <div class="mod-stat"><div class="sv r">12</div><div class="sl">Ditolak</div></div>
+      </div>
+    </div>
+    <div class="mod-card">
+      <div class="mod-num">MODUL 02</div>
+      <span class="mod-icon">🔱</span>
+      <div class="mod-title">Undersea Asset & Infrastructure</div>
+      <div class="mod-desc">Pemantauan kabel internet bawah laut, pipa minyak/gas, dengan buffer zona aman. Integrasi AIS Data untuk notifikasi real-time jika kapal memasuki zona merah.</div>
+      <div class="mod-stats">
+        <div class="mod-stat"><div class="sv">28,4K</div><div class="sl">km Kabel</div></div>
+        <div class="mod-stat"><div class="sv r">7</div><div class="sl">Aset Berisiko</div></div>
+      </div>
+    </div>
+    <div class="mod-card">
+      <div class="mod-num">MODUL 03</div>
+      <span class="mod-icon">🤖</span>
+      <div class="mod-title">Spatial Conflict AI Detector</div>
+      <div class="mod-desc">Deteksi otomatis tumpang tindih izin dengan kawasan konservasi, alur pelayaran, atau zona militer. AI bekerja 24/7 dengan response time &lt;5 detik.</div>
+      <div class="mod-stats">
+        <div class="mod-stat"><div class="sv g">97%</div><div class="sl">Akurasi AI</div></div>
+        <div class="mod-stat"><div class="sv r">8</div><div class="sl">Red Flag Aktif</div></div>
+        <div class="mod-stat"><div class="sv">26</div><div class="sl">Terselesaikan</div></div>
+      </div>
+    </div>
+    <div class="mod-card">
+      <div class="mod-num">MODUL 04</div>
+      <span class="mod-icon">💰</span>
+      <div class="mod-title">Revenue Leakage & PNBP Monitor</div>
+      <div class="mod-desc">Hitung otomatis estimasi PNBP sesuai PP 85/2021. Bandingkan data izin aktif vs tagihan yang diterima untuk mengidentifikasi gap revenue secara visual.</div>
+      <div class="mod-stats">
+        <div class="mod-stat"><div class="sv g" style="font-size:15px">Rp847M</div><div class="sl">Tertagih</div></div>
+        <div class="mod-stat"><div class="sv r" style="font-size:15px">Rp234M</div><div class="sl">Potensi Bocor</div></div>
+      </div>
+    </div>
+    <div class="mod-card">
+      <div class="mod-num">MODUL 05</div>
+      <span class="mod-icon">🌊</span>
+      <div class="mod-title">Social & Environmental Pulse</div>
+      <div class="mod-desc">Pemantauan sentimen masyarakat pesisir melalui jaringan Indopol. Deteksi lonjakan sentimen negatif sebelum eskalasi ke demonstrasi atau sengketa hukum.</div>
+      <div class="mod-stats">
+        <div class="mod-stat"><div class="sv g">64%</div><div class="sl">Sentimen Positif</div></div>
+        <div class="mod-stat"><div class="sv r">24%</div><div class="sl">Negatif</div></div>
+        <div class="mod-stat"><div class="sv">450+</div><div class="sl">Sumber Data</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- TEKNOLOGI AI -->
+<section id="teknologi" class="reveal">
+  <div class="section-label">03 — Teknologi AI</div>
+  <h2 class="section-title">Teknologi AI yang <span class="hlb">Digunakan</span></h2>
+  <p class="section-desc">Blue Economy Control Tower menggunakan kombinasi teknologi AI terdepan yang disesuaikan khusus untuk kebutuhan pemantauan ruang laut, perizinan, dan sentimen sosial pesisir.</p>
+
+  <div class="tech-grid">
+    <div class="tech-card">
+      <div class="tech-tag tag-geo">GEOSPATIAL AI</div>
+      <div class="tech-title">GeoServer + PostGIS & AI Spatial</div>
+      <div class="tech-desc">Tulang punggung analisis spasial platform. GeoServer melayani peta interaktif berbasis WMS/WFS, PostGIS menyimpan data koordinat, dan AI Spatial Conflict Engine mendeteksi tumpang tindih ruang laut secara otomatis dengan akurasi 97%.</div>
+      <div class="chip-list">
+        <span class="chip">GeoServer</span>
+        <span class="chip">PostGIS</span>
+        <span class="chip">Spatial Overlap</span>
+        <span class="chip">WMS/WFS API</span>
+        <span class="chip">Heat Map</span>
+      </div>
+    </div>
+
+    <div class="tech-card">
+      <div class="tech-tag tag-nlp">NLP SENTIMENT AI</div>
+      <div class="tech-title">NLP Sentiment Analysis (Indopol)</div>
+      <div class="tech-desc">Model Natural Language Processing berbahasa Indonesia untuk menganalisis sentimen masyarakat pesisir dari media sosial, berita lokal, dan laporan lapangan. Mengklasifikasikan per tema: penambangan pasir, reklamasi, budidaya laut, dan energi offshore.</div>
+      <div class="chip-list">
+        <span class="chip">IndoBERT</span>
+        <span class="chip">Sentiment Classify</span>
+        <span class="chip">Topic Modeling</span>
+        <span class="chip">Early Warning</span>
+        <span class="chip">Indopol API</span>
+      </div>
+    </div>
+
+    <div class="tech-card">
+      <div class="tech-tag tag-ais">AIS STREAM AI</div>
+      <div class="tech-title">AIS Stream Processor & Vessel AI</div>
+      <div class="tech-desc">Pemrosesan data Automatic Identification System (AIS) secara real-time dari MarineTraffic/AIS Hub untuk memantau posisi kapal, mendeteksi masuk zona merah, dan memberikan notifikasi ancaman terhadap aset bawah laut.</div>
+      <div class="chip-list">
+        <span class="chip">AIS Real-Time</span>
+        <span class="chip">Zone Detection</span>
+        <span class="chip">MarineTraffic API</span>
+        <span class="chip">Buffer Analysis</span>
+        <span class="chip">Alert Engine</span>
+      </div>
+    </div>
+
+    <div class="tech-card">
+      <div class="tech-tag tag-ai">MACHINE LEARNING</div>
+      <div class="tech-title">Red Flag & Anomaly Detection</div>
+      <div class="tech-desc">Algoritma Machine Learning untuk deteksi otomatis anomali perizinan, bottleneck birokrasi, dan potensi revenue leakage. Model dilatih pada data historis KKPRL untuk memberikan rekomendasi resolusi yang akurat.</div>
+      <div class="chip-list">
+        <span class="chip">Random Forest</span>
+        <span class="chip">Anomaly Detect</span>
+        <span class="chip">Red Flag System</span>
+        <span class="chip">Audit Trail AI</span>
+        <span class="chip">XGBoost</span>
+      </div>
+    </div>
+
+    <div class="tech-card">
+      <div class="tech-tag tag-ai">REVENUE AI</div>
+      <div class="tech-title">PNBP Calculator Engine (PP 85/2021)</div>
+      <div class="tech-desc">AI kalkulasi otomatis estimasi PNBP berdasarkan peraturan PP 85/2021: per meter lari kabel/pipa, per hektar reklamasi, pelabuhan, dan migas. Membandingkan izin aktif vs tagihan untuk deteksi revenue leakage secara visual.</div>
+      <div class="chip-list">
+        <span class="chip">SIMPONI API</span>
+        <span class="chip">PP 85/2021</span>
+        <span class="chip">Leakage Detect</span>
+        <span class="chip">Proyeksi PNBP</span>
+        <span class="chip">Compliance Check</span>
+      </div>
+    </div>
+
+    <div class="tech-card">
+      <div class="tech-tag tag-etl">DATA ENGINEERING</div>
+      <div class="tech-title">API Gateway & ETL Pipeline</div>
+      <div class="tech-desc">Infrastruktur data terpusat yang mengintegrasikan seluruh sumber melalui REST/WMS API Gateway. ETL pipeline memastikan sinkronisasi data real-time antara SKKPRL, BIG Geoportal, KLHK, Kemenhub, dan DKP Daerah.</div>
+      <div class="chip-list">
+        <span class="chip">REST API</span>
+        <span class="chip">WMS Gateway</span>
+        <span class="chip">Data Lake</span>
+        <span class="chip">Real-Time Sync</span>
+        <span class="chip">Apache Kafka</span>
+      </div>
+    </div>
+
+    <div class="tech-card">
+      <div class="tech-tag tag-sec">ENTERPRISE SECURITY</div>
+      <div class="tech-title">Keamanan Data & Audit Log</div>
+      <div class="tech-desc">Sistem keamanan berlapis untuk data strategis kedaulatan laut: enkripsi end-to-end, kontrol akses berbasis peran (role-based), audit trail setiap keputusan, dan kepatuhan standar keamanan pemerintah Indonesia.</div>
+      <div class="chip-list">
+        <span class="chip">Role-Based Access</span>
+        <span class="chip">Enkripsi E2E</span>
+        <span class="chip">Audit Trail</span>
+        <span class="chip">Compliance Gov</span>
+        <span class="chip">SSO Integration</span>
+      </div>
+    </div>
+
+    <div class="tech-card">
+      <div class="tech-tag tag-ai">GENERATIVE AI</div>
+      <div class="tech-title">LLM untuk Laporan & Tanya Data</div>
+      <div class="tech-desc">Model bahasa besar (LLM) memungkinkan pengambil keputusan bertanya dalam Bahasa Indonesia tentang kondisi ruang laut dan mendapatkan laporan naratif otomatis yang siap dipresentasikan ke pimpinan KKP.</div>
+      <div class="chip-list">
+        <span class="chip">LLM API</span>
+        <span class="chip">RAG System</span>
+        <span class="chip">Auto Report</span>
+        <span class="chip">Natural Query</span>
+        <span class="chip">Executive Brief</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- DATA SECTION -->
+<section id="data" class="reveal">
+  <div class="section-label">04 — Sumber Data</div>
+  <h2 class="section-title">Data Internal KKP &amp; <span class="hl">Eksternal Publik</span></h2>
+  <p class="section-desc">Platform mengintegrasikan dua kelompok besar data: data internal resmi KKP (terstruktur) dan data eksternal publik (terstruktur maupun tidak terstruktur) untuk analisis yang komprehensif.</p>
+
+  <div class="data-split">
+    <div class="data-card str">
+      <div class="data-card-title">🗂️ Data Internal KKP (Terstruktur)</div>
+      <p style="font-size:13px;color:var(--text-muted);margin-top:6px">Data resmi pemerintah yang tersimpan di sistem KKP, bersifat terstruktur dan dapat langsung diintegrasikan via API.</p>
+      <div class="badge-wrap">
+        <div class="src-badge b-int">📋 SKKPRL / OSS — Izin KKPRL</div>
+        <div class="src-badge b-int">🗺️ RZWP-3-K — Zonasi Provinsi</div>
+        <div class="src-badge b-int">💳 SIMPONI PNBP — Keuangan</div>
+        <div class="src-badge b-int">🐟 Data Konservasi KKP</div>
+        <div class="src-badge b-int">🏛️ DKP Provinsi — Perizinan</div>
+        <div class="src-badge b-int">🔍 Inspektorat — Pengawasan</div>
+      </div>
+      <div style="font-size:12.5px;color:var(--text-muted)"><strong style="color:var(--accent3)">Contoh data:</strong> Status pengajuan KKPRL, koordinat lokasi, data pemohon, tagihan & pembayaran PNBP, temuan pelanggaran, izin budidaya/tangkap.</div>
+    </div>
+
+    <div class="data-card unstr">
+      <div class="data-card-title">🌐 Data Eksternal Publik (Campuran)</div>
+      <p style="font-size:13px;color:var(--text-muted);margin-top:6px">Data dari sumber publik yang mencakup data spasial, posisi kapal real-time, sentimen sosial, dan kondisi lingkungan laut.</p>
+      <div class="badge-wrap">
+        <div class="src-badge b-ext">📡 AIS Global — Posisi Kapal</div>
+        <div class="src-badge b-ext">🗺️ BIG Geoportal — Peta Nasional</div>
+        <div class="src-badge b-ext">🏢 Kemenhub — ALKI & Pelabuhan</div>
+        <div class="src-badge b-ext">🌿 KLHK — Lingkungan Laut</div>
+        <div class="src-badge b-ext">📱 Indopol — Sentimen Sosial</div>
+        <div class="src-badge b-ext">🗾 OpenStreetMap — Infrastruktur</div>
+      </div>
+      <div style="font-size:12.5px;color:var(--text-muted)"><strong style="color:var(--accent4)">Contoh data:</strong> Posisi kapal real-time, peta RBI & batas administrasi, kualitas air laut, sentimen media sosial pesisir, jalur kabel laut OSM.</div>
+    </div>
+  </div>
+
+  <div class="insight-box">
+    <span class="insight-icon">💡</span>
+    <div>
+      <div class="insight-title">Mengapa Integrasi Data Ini Penting?</div>
+      <div class="insight-text">Sebelumnya, data GIS, data perizinan, dan data sosial tersimpan di sistem yang berbeda-beda (data silo) — menyebabkan keputusan terlambat dan investasi terhambat. Blue Economy Control Tower menyatukan semuanya dalam satu layar sehingga Direktur KKP dapat melihat kondisi ruang laut secara holistik dalam hitungan detik.</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- KROSTAB AI -->
+<section id="krostab" class="reveal">
+  <div class="section-label">05 — Krostabulasi AI</div>
+  <h2 class="section-title">Contoh Fitur <span class="hl">Krostab Data AI</span></h2>
+  <p class="section-desc">AI menggabungkan data dari berbagai modul untuk menghasilkan analisis silang yang tidak bisa dilakukan secara manual — menemukan pola dan risiko tersembunyi di ruang laut Indonesia.</p>
+
+  <div class="tab-nav">
+    <button class="tab-btn active" onclick="switchTab('t1',this)">Sentimen × Zonasi</button>
+    <button class="tab-btn" onclick="switchTab('t2',this)">Konflik Spasial × Izin</button>
+    <button class="tab-btn" onclick="switchTab('t3',this)">PNBP × Data AIS</button>
+  </div>
+
+  <!-- TAB 1 -->
+  <div id="t1" class="tab-content active">
+    <div class="crosstab-box">
+      <div class="ctab-head">
+        <div class="ctab-title">🌊 Krostab: Sentimen Masyarakat Pesisir × Zona Pemanfaatan Ruang Laut
+          <span class="ai-pill">NLP AI · INDOPOL</span>
+        </div>
+      </div>
+      <div class="ctab-ctrl">
+        <button class="ctrl-btn active">Semua Wilayah</button>
+        <button class="ctrl-btn">Jawa</button>
+        <button class="ctrl-btn">Sulawesi</button>
+        <button class="ctrl-btn">Kalimantan</button>
+        <button class="ctrl-btn">📅 Q1 2026</button>
+      </div>
+      <div class="ctab-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Isu Pemanfaatan Ruang Laut</th>
+              <th>Sentimen AI (NLP)</th>
+              <th>Volume Data</th>
+              <th>Intensitas Isu</th>
+              <th>Zona Terdampak</th>
+              <th>Status Early Warning</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-name">🏖️ Reklamasi Pesisir</td>
+              <td><span class="neg">▼ Negatif 71%</span></td>
+              <td>2.840 posting</td>
+              <td><div class="bar-cell"><div class="bar-bg"><div class="bar-fill bred" style="width:85%"></div></div><span class="sc">85%</span></div></td>
+              <td style="color:var(--accent4)">Jawa Utara, Bali</td>
+              <td style="color:var(--red);font-size:12px;font-weight:600">🔴 PERINGATAN DINI</td>
+            </tr>
+            <tr>
+              <td class="td-name">⛏️ Penambangan Pasir</td>
+              <td><span class="neg">▼ Negatif 84%</span></td>
+              <td>1.920 posting</td>
+              <td><div class="bar-cell"><div class="bar-bg"><div class="bar-fill bred" style="width:92%"></div></div><span class="sc">92%</span></div></td>
+              <td style="color:var(--accent4)">Kepri, Bangka</td>
+              <td style="color:var(--red);font-size:12px;font-weight:600">🔴 ESKALASI TINGGI</td>
+            </tr>
+            <tr>
+              <td class="td-name">🌊 Budidaya Laut</td>
+              <td><span class="pos">▲ Positif 78%</span></td>
+              <td>3.460 posting</td>
+              <td><div class="bar-cell"><div class="bar-bg"><div class="bar-fill bgreen" style="width:72%"></div></div><span class="sc">72%</span></div></td>
+              <td style="color:var(--accent3)">Sulawesi, NTT</td>
+              <td style="color:var(--accent3);font-size:12px;font-weight:600">✅ KONDUSIF</td>
+            </tr>
+            <tr>
+              <td class="td-name">⚡ Energi Terbarukan Offshore</td>
+              <td><span class="neu">◆ Netral 55%</span></td>
+              <td>890 posting</td>
+              <td><div class="bar-cell"><div class="bar-bg"><div class="bar-fill borange" style="width:44%"></div></div><span class="sc">44%</span></div></td>
+              <td style="color:var(--accent4)">Selat Sunda</td>
+              <td style="color:var(--accent4);font-size:12px;font-weight:600">⚠️ PANTAU</td>
+            </tr>
+            <tr>
+              <td class="td-name">⚓ Pelabuhan & DLKP</td>
+              <td><span class="pos">▲ Positif 61%</span></td>
+              <td>1.340 posting</td>
+              <td><div class="bar-cell"><div class="bar-bg"><div class="bar-fill bblue" style="width:58%"></div></div><span class="sc">58%</span></div></td>
+              <td style="color:var(--accent3)">Nasional</td>
+              <td style="color:var(--accent3);font-size:12px;font-weight:600">✅ KONDUSIF</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="insight-box">
+      <span class="insight-icon">🧠</span>
+      <div>
+        <div class="insight-title">Insight NLP AI — Indopol Network</div>
+        <div class="insight-text">AI NLP mendeteksi lonjakan 3,2x sentimen negatif terkait penambangan pasir di Kepulauan Riau dalam 14 hari terakhir — berkorelasi dengan 2 pengajuan izin baru yang sedang diproses. Rekomendasi: tinjau izin tersebut sebelum berpotensi memicu demonstrasi masyarakat nelayan.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 2 -->
+  <div id="t2" class="tab-content">
+    <div class="crosstab-box">
+      <div class="ctab-head">
+        <div class="ctab-title">🤖 Krostab: Konflik Spasial AI × Status Perizinan KKPRL
+          <span class="ai-pill">SPATIAL AI · 97% AKURASI</span>
+        </div>
+      </div>
+      <div class="ctab-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>ID Pengajuan</th>
+              <th>Jenis Pemanfaatan</th>
+              <th>Konflik Terdeteksi AI</th>
+              <th>Zona Tumpang Tindih</th>
+              <th>Risiko Spasial</th>
+              <th>Rekomendasi AI</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-name">KKPRL-2026-0147</td>
+              <td>Kabel Serat Optik</td>
+              <td><span class="pos">✓ Tidak Ada</span></td>
+              <td>—</td>
+              <td><div class="bar-cell"><div class="bar-bg"><div class="bar-fill bgreen" style="width:8%"></div></div><span class="sc">8%</span></div></td>
+              <td style="color:var(--accent3);font-size:12px;font-weight:600">✅ Lanjutkan Proses</td>
+            </tr>
+            <tr>
+              <td class="td-name">KKPRL-2026-0153</td>
+              <td>Reklamasi 42 Ha</td>
+              <td><span class="neg">⚠ 2 Konflik</span></td>
+              <td>Kawasan Konservasi</td>
+              <td><div class="bar-cell"><div class="bar-bg"><div class="bar-fill bred" style="width:91%"></div></div><span class="sc">91%</span></div></td>
+              <td style="color:var(--red);font-size:12px;font-weight:600">🔴 Red Flag — Tolak</td>
+            </tr>
+            <tr>
+              <td class="td-name">KKPRL-2026-0158</td>
+              <td>Pipa Gas Offshore</td>
+              <td><span class="neg">⚠ 1 Konflik</span></td>
+              <td>ALKI II Kemenhub</td>
+              <td><div class="bar-cell"><div class="bar-bg"><div class="bar-fill borange" style="width:64%"></div></div><span class="sc">64%</span></div></td>
+              <td style="color:var(--accent4);font-size:12px;font-weight:600">⚠️ Revisi Trase</td>
+            </tr>
+            <tr>
+              <td class="td-name">KKPRL-2026-0162</td>
+              <td>Budidaya Rumput Laut</td>
+              <td><span class="pos">✓ Tidak Ada</span></td>
+              <td>—</td>
+              <td><div class="bar-cell"><div class="bar-bg"><div class="bar-fill bgreen" style="width:12%"></div></div><span class="sc">12%</span></div></td>
+              <td style="color:var(--accent3);font-size:12px;font-weight:600">✅ Lanjutkan Proses</td>
+            </tr>
+            <tr>
+              <td class="td-name">KKPRL-2026-0171</td>
+              <td>PLTS Offshore</td>
+              <td><span class="neg">⚠ 3 Konflik</span></td>
+              <td>Zona Militer + ALKI</td>
+              <td><div class="bar-cell"><div class="bar-bg"><div class="bar-fill bred" style="width:97%"></div></div><span class="sc">97%</span></div></td>
+              <td style="color:var(--red);font-size:12px;font-weight:600">🔴 Red Flag — Tolak</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="insight-box">
+      <span class="insight-icon">🤖</span>
+      <div>
+        <div class="insight-title">Spatial AI — Eliminasi Human Error</div>
+        <div class="insight-text">Dari 5 pengajuan di atas, AI Spatial Conflict mendeteksi 2 pengajuan bermasalah dalam &lt;5 detik yang secara manual membutuhkan 2-3 hari analisis GIS. Total konflik aktif: 34 kasus — 8 red flag, 26 terselesaikan. AI bekerja 24/7 tanpa bias, analis fokus pada resolusi dan negosiasi.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 3 -->
+  <div id="t3" class="tab-content">
+    <div class="crosstab-box">
+      <div class="ctab-head">
+        <div class="ctab-title">💰 Krostab: Monitor PNBP × Data Kapal AIS Real-Time
+          <span class="ai-pill">REVENUE AI · PP 85/2021</span>
+        </div>
+      </div>
+      <div class="ctab-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Pemegang Izin</th>
+              <th>Jenis Aktivitas</th>
+              <th>PNBP Seharusnya</th>
+              <th>PNBP Tertagih</th>
+              <th>Gap / Leakage</th>
+              <th>Status Kapal AIS</th>
+              <th>Status AI</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-name">PT Kabel Nusa</td>
+              <td>Kabel 240 km</td>
+              <td>Rp 84 M</td>
+              <td><span class="pos">Rp 84 M</span></td>
+              <td style="color:var(--accent3)">Rp 0 (Lunas)</td>
+              <td>✅ Normal</td>
+              <td style="color:var(--accent3);font-size:12px;font-weight:600">✅ Compliant</td>
+            </tr>
+            <tr>
+              <td class="td-name">PT Reklamindo</td>
+              <td>Reklamasi 18 Ha</td>
+              <td>Rp 127 M</td>
+              <td><span class="neg">Rp 43 M</span></td>
+              <td style="color:var(--red)">⚠ Bocor Rp 84 M</td>
+              <td>⚓ Kapal Aktif</td>
+              <td style="color:var(--red);font-size:12px;font-weight:600">🔴 Tunggakan</td>
+            </tr>
+            <tr>
+              <td class="td-name">PT Migas Nusantara</td>
+              <td>Pipa 180 km</td>
+              <td>Rp 210 M</td>
+              <td><span class="pos">Rp 210 M</span></td>
+              <td style="color:var(--accent3)">Rp 0 (Lunas)</td>
+              <td>✅ Normal</td>
+              <td style="color:var(--accent3);font-size:12px;font-weight:600">✅ Compliant</td>
+            </tr>
+            <tr>
+              <td class="td-name">CV Budidaya Laut</td>
+              <td>Budidaya 8 Ha</td>
+              <td>Rp 28 M</td>
+              <td><span class="neg">Rp 0</span></td>
+              <td style="color:var(--red)">⚠ Bocor Rp 28 M</td>
+              <td>🚨 Zona Merah</td>
+              <td style="color:var(--red);font-size:12px;font-weight:600">🔴 Ilegal+Bocor</td>
+            </tr>
+            <tr>
+              <td class="td-name">PT Offshore Wind</td>
+              <td>PLTS Offshore 5 Ha</td>
+              <td>Rp 122 M</td>
+              <td><span class="neu">Rp 95 M</span></td>
+              <td style="color:var(--accent4)">Gap Rp 27 M</td>
+              <td>✅ Normal</td>
+              <td style="color:var(--accent4);font-size:12px;font-weight:600">⚠️ Verifikasi</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="insight-box">
+      <span class="insight-icon">💡</span>
+      <div>
+        <div class="insight-title">Temuan Revenue AI — Krostab PNBP × AIS</div>
+        <div class="insight-text">AI mendeteksi CV Budidaya Laut beroperasi aktif (kapal terdeteksi di zona merah via AIS) namun belum membayar PNBP sepeser pun — potensi kerugian negara Rp 28 M. Total gap bulan ini: Rp 139 M dari 2 pemegang izin bermasalah. Data kapal AIS menjadi bukti kuat bahwa aktivitas nyata terjadi meski tagihan belum dibayar.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- INTEGRASI -->
+<section id="integrasi" class="reveal">
+  <div class="section-label">06 — Integrasi Sistem</div>
+  <h2 class="section-title">Terhubung ke <span class="hlb">Semua Sumber</span></h2>
+  <p class="section-desc">Blue Economy Control Tower dapat diintegrasikan dengan sistem pemerintah, sumber data publik, maupun model AI eksternal melalui API Gateway standar.</p>
+
+  <div style="margin-bottom:30px">
+    <div class="section-label" style="margin-bottom:14px">🏛️ Sistem Pemerintah (Internal)</div>
+    <div class="integ-grid">
+      <div class="integ-card"><span class="integ-icon">📋</span><div class="integ-name">SKKPRL / OSS</div><div class="integ-type">Perizinan KKP</div></div>
+      <div class="integ-card"><span class="integ-icon">💳</span><div class="integ-name">SIMPONI PNBP</div><div class="integ-type">Keuangan Negara</div></div>
+      <div class="integ-card"><span class="integ-icon">🗺️</span><div class="integ-name">BIG Geoportal</div><div class="integ-type">Peta Nasional</div></div>
+      <div class="integ-card"><span class="integ-icon">🏛️</span><div class="integ-name">Kemenhub / ALKI</div><div class="integ-type">Alur Pelayaran</div></div>
+      <div class="integ-card"><span class="integ-icon">🌿</span><div class="integ-name">KLHK PPKL</div><div class="integ-type">Lingkungan Laut</div></div>
+      <div class="integ-card"><span class="integ-icon">🏢</span><div class="integ-name">DKP Provinsi</div><div class="integ-type">Izin Daerah</div></div>
+    </div>
+  </div>
+
+  <div style="margin-bottom:30px">
+    <div class="section-label" style="margin-bottom:14px">🌐 Sumber Data Publik / Eksternal</div>
+    <div class="integ-grid">
+      <div class="integ-card"><span class="integ-icon">📡</span><div class="integ-name">AIS Hub / MarineTraffic</div><div class="integ-type">Posisi Kapal Real-Time</div></div>
+      <div class="integ-card"><span class="integ-icon">📱</span><div class="integ-name">Indopol Network</div><div class="integ-type">Sentimen Sosial Pesisir</div></div>
+      <div class="integ-card"><span class="integ-icon">🗾</span><div class="integ-name">OpenStreetMap</div><div class="integ-type">Infrastruktur Publik</div></div>
+      <div class="integ-card"><span class="integ-icon">📰</span><div class="integ-name">Media & Berita Lokal</div><div class="integ-type">NLP Monitoring</div></div>
+      <div class="integ-card"><span class="integ-icon">🛰️</span><div class="integ-name">Citra Satelit</div><div class="integ-type">Remote Sensing</div></div>
+      <div class="integ-card"><span class="integ-icon">🔌</span><div class="integ-name">REST / WMS API</div><div class="integ-type">Sumber Apapun</div></div>
+    </div>
+  </div>
+
+  <div>
+    <div class="section-label" style="margin-bottom:14px">🧠 Model AI yang Dapat Dipilih / Diganti</div>
+    <div class="integ-grid">
+      <div class="integ-card"><span class="integ-icon">🤖</span><div class="integ-name">LLM Lokal (On-Premise)</div><div class="integ-type">Data Kedaulatan Aman</div></div>
+      <div class="integ-card"><span class="integ-icon">🧠</span><div class="integ-name">Claude / GPT API</div><div class="integ-type">Laporan & Analisis</div></div>
+      <div class="integ-card"><span class="integ-icon">🗺️</span><div class="integ-name">Custom Spatial AI</div><div class="integ-type">Model Terlatih KKP</div></div>
+      <div class="integ-card"><span class="integ-icon">💬</span><div class="integ-name">IndoBERT / NLP ID</div><div class="integ-type">Bahasa Indonesia</div></div>
+      <div class="integ-card"><span class="integ-icon">🔌</span><div class="integ-name">Model Custom Sendiri</div><div class="integ-type">API Standar</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ROADMAP -->
+<section class="reveal">
+  <div class="section-label">07 — Implementasi</div>
+  <h2 class="section-title">Roadmap <span class="hl">12 Bulan</span> Go-Live</h2>
+  <p class="section-desc">Implementasi bertahap (phased deployment) memastikan setiap modul berjalan stabil sebelum melanjutkan ke fase berikutnya.</p>
+
+  <div class="roadmap">
+    <div class="phase-card">
+      <div class="phase-dot"></div>
+      <div class="phase-num">FASE 01</div>
+      <div class="phase-period">Bulan 1–3</div>
+      <div class="phase-title">Foundation & Data Integration</div>
+      <ul class="phase-items">
+        <li>Setup infrastruktur server</li>
+        <li>Integrasi SKKPRL & data izin</li>
+        <li>Implementasi GeoServer + PostGIS</li>
+        <li>Dashboard KKPRL Tracker v1.0</li>
+      </ul>
+    </div>
+    <div class="phase-card">
+      <div class="phase-dot"></div>
+      <div class="phase-num">FASE 02</div>
+      <div class="phase-period">Bulan 4–6</div>
+      <div class="phase-title">Core Modules Development</div>
+      <ul class="phase-items">
+        <li>Modul Undersea Asset Map</li>
+        <li>Integrasi AIS Data Feed</li>
+        <li>PNBP Calculator Engine</li>
+        <li>Alert & Notification System</li>
+      </ul>
+    </div>
+    <div class="phase-card">
+      <div class="phase-dot g"></div>
+      <div class="phase-num">FASE 03</div>
+      <div class="phase-period">Bulan 7–9</div>
+      <div class="phase-title">AI & Analytics Layer</div>
+      <ul class="phase-items">
+        <li>Spatial Conflict AI Training</li>
+        <li>Integrasi Indopol Network</li>
+        <li>Sentiment Analysis NLP</li>
+        <li>Red Flag Auto-Detection</li>
+      </ul>
+    </div>
+    <div class="phase-card">
+      <div class="phase-dot g"></div>
+      <div class="phase-num">FASE 04</div>
+      <div class="phase-period">Bulan 10–12</div>
+      <div class="phase-title">Full Integration & Go-Live</div>
+      <ul class="phase-items">
+        <li>UAT bersama KKP & Stakeholder</li>
+        <li>Training operator & analis</li>
+        <li>Go-live Control Tower</li>
+        <li>Monitoring & continuous improvement</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Features -->
+  <div style="margin-top:60px">
+    <div class="section-label" style="margin-bottom:14px">Keunggulan Platform</div>
+    <div class="feat-grid">
+      <div class="feat-item"><div class="feat-icon">🗺️</div><div class="feat-content"><div class="title">Peta Spasial Real-Time</div><div class="desc">Layer GIS interaktif yang memperlihatkan kondisi seluruh ruang laut Indonesia termasuk status izin, posisi kapal, dan zona konflik secara langsung.</div></div></div>
+      <div class="feat-item"><div class="feat-icon">🔴</div><div class="feat-content"><div class="title">Red Flag Otomatis &lt;5 Detik</div><div class="desc">AI Spatial Conflict mendeteksi tumpang tindih dan mengeluarkan notifikasi merah secara otomatis sebelum izin bermasalah dikeluarkan.</div></div></div>
+      <div class="feat-item"><div class="feat-icon">📡</div><div class="feat-content"><div class="title">Pantau Kapal via AIS 24/7</div><div class="desc">Notifikasi real-time jika kapal berlabuh di zona merah atau mendekati infrastruktur strategis kabel/pipa bawah laut.</div></div></div>
+      <div class="feat-item"><div class="feat-icon">💰</div><div class="feat-content"><div class="title">Deteksi Revenue Leakage</div><div class="desc">Tidak ada satu pun pengusaha yang bisa memanfaatkan ruang laut tanpa terdeteksi dan membayar PNBP sesuai PP 85/2021.</div></div></div>
+      <div class="feat-item"><div class="feat-icon">🌊</div><div class="feat-content"><div class="title">Early Warning Konflik Sosial</div><div class="desc">Deteksi lonjakan sentimen negatif masyarakat pesisir sebelum bereskalasi ke demonstrasi atau sengketa hukum yang merugikan investasi.</div></div></div>
+      <div class="feat-item"><div class="feat-icon">📋</div><div class="feat-content"><div class="title">Laporan Eksekutif Otomatis</div><div class="desc">AI menghasilkan ringkasan kondisi ruang laut nasional siap presentasi ke pimpinan KKP tanpa perlu mengolah data manual.</div></div></div>
+      <div class="feat-item"><div class="feat-icon">🔐</div><div class="feat-content"><div class="title">Keamanan Data Kedaulatan</div><div class="desc">Opsi deployment on-premise untuk data strategis sensitif, dengan kontrol akses berbasis peran dan audit trail seluruh aktivitas.</div></div></div>
+      <div class="feat-item"><div class="feat-icon">📱</div><div class="feat-content"><div class="title">Akses Multi-Perangkat</div><div class="desc">Satu layar, akses dari mana saja. Responsif di desktop, tablet, maupun smartphone — online 24/7 dengan keamanan terjamin.</div></div></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="logo">🌊 NEXGOV · BLUE ECONOMY CONTROL TOWER</div>
+  <p style="margin-top:8px">Platform NexGov 2026 · Kementerian Kelautan dan Perikanan Republik Indonesia</p>
+  <p style="margin-top:6px;font-size:11px;color:var(--text-dim)">Solusi Digital Pemantauan Ruang Laut Nasional · 5 Modul · AI-Powered · Real-Time · Terintegrasi</p>
+</footer>
+
+<script>
+  function switchTab(id, btn) {
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  document.querySelectorAll('.ctrl-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      this.closest('.ctab-ctrl').querySelectorAll('.ctrl-btn').forEach(s => s.classList.remove('active'));
+      this.classList.add('active');
+    });
+  });
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(r => observer.observe(r));
+</script>
+</body>
+</html>
