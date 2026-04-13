@@ -124,7 +124,7 @@ const OverviewDashboard: React.FC<{ onSelectModule: (id: ViewMode) => void }> = 
             </Badge>
           </div>
           <h1 className="text-4xl font-black text-white mb-1 tracking-tighter">
-            SAKTI <span className="text-cyan-400">DEMO</span>
+            SAKTI <span className="text-cyan-400">KKP</span>
           </h1>
           <p className="text-[10px] md:text-[12px] font-black tracking-[0.2em] uppercase text-[#D4AF37] mb-4">
             INDOPOL SURVEY NETWORK
@@ -306,7 +306,7 @@ function App() {
               <div className={sidebarOpen ? 'block' : 'hidden md:block'}>
                 <div className="flex flex-col justify-center -space-y-0.5">
                   <h1 className="font-black text-sm md:text-base leading-none tracking-tighter uppercase text-white whitespace-nowrap">
-                    SAKTI <span className="text-cyan-400">DEMO</span>
+                    SAKTI <span className="text-cyan-400">KKP</span>
                   </h1>
                   <p className="text-[7px] md:text-[9px] font-black tracking-[0.15em] uppercase whitespace-nowrap text-[#D4AF37]">
                     INDOPOL SURVEY NETWORK
@@ -331,7 +331,7 @@ function App() {
               <div className="h-8 w-px bg-slate-700/50 mx-1" />
               <div className="flex items-center gap-3 group cursor-pointer">
                 <div className="text-right hidden sm:block">
-                  <p className="text-xs font-bold text-white leading-none">Admin Terminal</p>
+                  <p className="text-xs font-bold text-white leading-none">Otoritas KKP</p>
                   <p className="text-[10px] text-green-500 font-medium leading-tight">Privileged</p>
                 </div>
                 <div className="w-9 h-9 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center group-hover:border-cyan-500/50 transition-colors profile-img">
@@ -470,7 +470,7 @@ function App() {
           <div className="flex items-center gap-4">
             <span>© {new Date().getFullYear()} KKP Republik Indonesia</span>
             <div className="w-1 h-1 bg-slate-800 rounded-full" />
-            <span className="text-cyan-500/50 font-mono">SAKTI Demo v2.4-stable</span>
+            <span className="text-cyan-500/50 font-mono">SAKTI KKP v2.4-stable</span>
           </div>
           <div className="flex items-center gap-4">
             <span className="flex items-center gap-2 bg-green-500/5 text-green-500 px-3 py-1 rounded-full border border-green-500/20">

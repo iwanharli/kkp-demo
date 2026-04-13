@@ -32,7 +32,7 @@ const LandingPage: React.FC = () => {
       <nav>
         <div className="nav-logo">
           <span className="wave">🌊</span>
-          SAKTI DEMO · CONTROL TOWER
+           KKP · CONTROL TOWER
         </div>
         <ul className="nav-links">
           {/* <li><a href="#cara-kerja">Cara Kerja</a></li> */}
@@ -73,8 +73,8 @@ const LandingPage: React.FC = () => {
             <span className="dot"></span>
             Kementerian Kelautan dan Perikanan · Republik Indonesia
           </div>
-          <h1><span className="blue">SAKTI</span></h1>
-          <h2>DEMO Dashboard</h2>
+          <h1><span className="blue">KKP</span></h1>
+          <h2>Command Center</h2>
           <p>Sistem Terpadu Pemantauan Ruang Laut Nasional — menyatukan Data GIS, Administratif & Sosial dalam satu layar cerdas berbasis Kecerdasan Buatan.</p>
           <div className="hero-stats">
             <div className="hero-stat">
@@ -196,7 +196,7 @@ const LandingPage: React.FC = () => {
       {/* 5 MODUL */}
       <section id="modul" className="reveal">
         <div className="section-label">02 — Modul Platform</div>
-        <h2 className="section-title">5 Modul <span className="hl">Terintegrasi</span> SAKTI</h2>
+        <h2 className="section-title">5 Modul <span className="hl">Terintegrasi</span> KKP</h2>
         <p className="section-desc">Setiap modul dirancang khusus untuk kebutuhan pemantauan ruang laut KKP RI — bekerja secara mandiri maupun saling terhubung dalam satu platform.</p>
 
         <div className="mod-grid">
@@ -262,7 +262,7 @@ const LandingPage: React.FC = () => {
       <section id="teknologi" className="reveal">
         <div className="section-label">03 — Teknologi AI</div>
         <h2 className="section-title">Teknologi AI yang <span className="hlb">Digunakan</span></h2>
-        <p className="section-desc">SAKTI Demo menggunakan kombinasi teknologi AI terdepan yang disesuaikan khusus untuk kebutuhan pemantauan ruang laut, perizinan, dan sentimen sosial pesisir.</p>
+        <p className="section-desc"> Demo menggunakan kombinasi teknologi AI terdepan yang disesuaikan khusus untuk kebutuhan pemantauan ruang laut, perizinan, dan sentimen sosial pesisir.</p>
 
         <div className="tech-grid">
           <div className="tech-card">
@@ -797,7 +797,7 @@ const LandingPage: React.FC = () => {
       </section>
 
       <footer>
-        <div className="logo">🌊 SAKTI DEMO · CONTROL TOWER</div>
+        <div className="logo">🌊 KKP · CONTROL TOWER</div>
         <p style={{ marginTop: '8px' }}>Platform NexGov 2026 · Kementerian Kelautan dan Perikanan Republik Indonesia</p>
         <p style={{ marginTop: '6px', fontSize: '11px', color: 'var(--text-dim)' }}>Solusi Digital Pemantauan Ruang Laut Nasional · 5 Modul · AI-Powered · Real-Time · Terintegrasi</p>
       </footer>
