@@ -1,6 +1,6 @@
 // ============================================
-// NEXGOV INTELEJEN DASHBOARD
-// KKP (Kementerian Kelautan dan Perikanan)
+// SAKTI DEMO DASHBOARD
+// SAKTI (Kementerian Kelautan dan Perikanan)
 // Tema: Cyber-Intelligence War Room
 // ============================================
 
@@ -109,7 +109,7 @@ const OverviewDashboard: React.FC<{ onSelectModule: (id: ViewMode) => void }> = 
         
         <div className="relative z-10 w-full max-w-[120px] flex justify-center">
           <div className="w-24 h-24 rounded-2xl bg-white border border-white/20 flex items-center justify-center shadow-2xl p-0 overflow-hidden group hover:scale-105 transition-transform duration-500">
-            <img src="/logo.png" alt="Nexgov Logo" className="w-full h-full object-contain scale-[2.5]" />
+            <img src="/logo.png" alt="SAKTI Logo" className="w-full h-full object-contain scale-[2.5]" />
           </div>
         </div>
 
@@ -124,7 +124,7 @@ const OverviewDashboard: React.FC<{ onSelectModule: (id: ViewMode) => void }> = 
             </Badge>
           </div>
           <h1 className="text-4xl font-black text-white mb-1 tracking-tighter">
-            NEXGOV <span className="text-cyan-400">INTELLIGENCE</span>
+            SAKTI <span className="text-cyan-400">DEMO</span>
           </h1>
           <p className="text-[10px] md:text-[12px] font-black tracking-[0.2em] uppercase text-[#D4AF37] mb-4">
             INDOPOL SURVEY NETWORK
@@ -301,12 +301,12 @@ function App() {
             </button>
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-xl bg-white border border-white/20 flex items-center justify-center shadow-lg shadow-white/5 p-0 overflow-hidden group hover:scale-105 transition-transform duration-300">
-                <img src="/logo.png" alt="Nexgov Logo" className="w-full h-full object-contain scale-[2.5]" />
+                <img src="/logo.png" alt="SAKTI Logo" className="w-full h-full object-contain scale-[2.5]" />
               </div>
               <div className={sidebarOpen ? 'block' : 'hidden md:block'}>
                 <div className="flex flex-col justify-center -space-y-0.5">
                   <h1 className="font-black text-sm md:text-base leading-none tracking-tighter uppercase text-white whitespace-nowrap">
-                    NEXGOV <span className="text-cyan-400">INTELLIGENCE</span>
+                    SAKTI <span className="text-cyan-400">DEMO</span>
                   </h1>
                   <p className="text-[7px] md:text-[9px] font-black tracking-[0.15em] uppercase whitespace-nowrap text-[#D4AF37]">
                     INDOPOL SURVEY NETWORK
@@ -470,7 +470,7 @@ function App() {
           <div className="flex items-center gap-4">
             <span>© {new Date().getFullYear()} KKP Republik Indonesia</span>
             <div className="w-1 h-1 bg-slate-800 rounded-full" />
-            <span className="text-cyan-500/50 font-mono">Nexgov Intelligence v2.4-stable</span>
+            <span className="text-cyan-500/50 font-mono">SAKTI Demo v2.4-stable</span>
           </div>
           <div className="flex items-center gap-4">
             <span className="flex items-center gap-2 bg-green-500/5 text-green-500 px-3 py-1 rounded-full border border-green-500/20">
