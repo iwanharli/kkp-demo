@@ -43,7 +43,7 @@ const LandingPage: React.FC = () => {
           <li><a href="#integrasi">Integrasi</a></li>
           <li>
             <a 
-              href="/admin/" 
+              href="/admin/index.html" 
               style={{
                 color: 'var(--accent)',
                 border: '1px solid rgba(0,170,255,0.4)',
